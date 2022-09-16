@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ArticlesController < ApplicationController
   def index
     @articles = Article.all
@@ -11,14 +13,13 @@ class ArticlesController < ApplicationController
     @article = Article.new
   end
 
-
   def create
-    @article = Article.find(params[:id])
+    @article = Article.new(article_params)
     @article.save
-    redirect_to article_path(@article) 
+    redirect_to article_path(@article)
   end
 
-  def edit 
+  def edit
     @article = Article.find(params[:id])
   end
 
@@ -34,7 +35,7 @@ class ArticlesController < ApplicationController
     redirect_to article_path(@article)
   end
 
-  private 
+  private
 
   def article_params
     params.require(:article).permit(:title, :content)
