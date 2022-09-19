@@ -57,22 +57,22 @@ RSpec.describe ArticlesController, type: :controller do
   end
 
   describe '#create' do
-    xit 'works' do
-      get :create, params: { title: 'article', content: 'text and more text' }
+    it 'works' do
+      post :create, params: {article:{ title: 'article', content: 'text and more text' }}
 
       expect(response).to have_http_status(:found)
     end
 
-    xit 'redirects to Articles#show' do
-      get :create, params: { title: 'article', content: 'text and more text' }
+    it 'redirects to Articles#show' do
+      post :create, params: {article:{ title: 'article', content: 'text and more text' }}
 
       expect(response).to redirect_to(article_path(Article.last))
     end
-    xit 'creates a new Article from given parameters' do
+    it 'creates a new Article from given parameters' do
       title   = 'new title'
-      content = 'sexy new info'
+      content = 'new info'
 
-      get :create, params: { title:, content: }
+      post :create, params: {article:{title: 'new title', content: 'new info'}}
 
       expect(Article.last).to have_attributes(
         title:,
